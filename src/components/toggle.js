@@ -14,7 +14,7 @@ class Toggle extends Component {
         feed.isActive = !feed.isActive;
 
         fetch('http://localhost:3000/feeds/' + feed._id, {
-            body: { isActive: !this.state.feeds[0].isActive },
+            body: JSON.stringify(feed),
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -22,6 +22,7 @@ class Toggle extends Component {
         })
             .then(updatedFeed => updatedFeed.json())
             .then(jsonedFeed => {
+                console.log(jsonedFeed);
                 fetch('http://localhost:3000/feeds/')
                     .then(response => response.json())
                     .then(feeds => {
